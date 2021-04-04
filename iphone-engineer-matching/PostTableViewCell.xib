@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="17506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17505"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" restorationIdentifier="Cell" selectionStyle="default" indentationWidth="10" rowHeight="445" id="KGk-i7-Jjw" customClass="PostTableViewCell" customModule="iphone_engineer_matching" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="316" height="396"/>
+            <autoresizingMask key="autoresizingMask" flexibleMinX="YES" widthSizable="YES" flexibleMaxX="YES" flexibleMinY="YES" heightSizable="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="316" height="396"/>
+                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
+                <subviews>
+                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Ehx-2c-V2X">
+                        <rect key="frame" x="10" y="10" width="50" height="50"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="50" id="Ws2-hG-BY9"/>
+                            <constraint firstAttribute="height" constant="50" id="syx-I2-cKk"/>
+                        </constraints>
+                    </imageView>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="タイトル" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Bwc-Ei-p21">
+                        <rect key="frame" x="80" y="24.5" width="226" height="21.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="募集内容" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TPR-bY-EnD">
+                        <rect key="frame" x="26" y="109" width="264" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="いいね数" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="8rQ-jM-bd4">
+                        <rect key="frame" x="71" y="328.5" width="45" height="13.5"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="11"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="募集内容" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9Z9-Sc-1mM">
+                        <rect key="frame" x="21" y="81" width="62" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="募集ジャンル" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRN-qD-gGk">
+                        <rect key="frame" x="21" y="147" width="92" height="18"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" ambiguous="YES" text="ジャンル" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fJj-hk-fmC">
+                        <rect key="frame" x="26" y="175" width="57.5" height="17"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="投稿日" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2up-VP-Eb4">
+                        <rect key="frame" x="265" y="330" width="25" height="10"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="8"/>
+                        <nil key="textColor"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8h7-LR-K5J">
+                        <rect key="frame" x="26" y="315" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="40" id="FpH-Cz-XsI"/>
+                            <constraint firstAttribute="width" constant="40" id="rwV-P5-0dW"/>
+                        </constraints>
+                        <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                        <state key="normal" title="Button" image="like_none"/>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Ehx-2c-V2X" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="top" constant="10" id="1ol-24-Ldn"/>
+                    <constraint firstItem="8rQ-jM-bd4" firstAttribute="leading" secondItem="8h7-LR-K5J" secondAttribute="trailing" constant="5" id="4bz-1a-4ER"/>
+                    <constraint firstItem="8h7-LR-K5J" firstAttribute="top" secondItem="fJj-hk-fmC" secondAttribute="bottom" constant="30" id="8aO-SH-yf7"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="2up-VP-Eb4" secondAttribute="trailing" constant="10" id="8yd-vo-uKN"/>
+                    <constraint firstAttribute="trailingMargin" secondItem="TPR-bY-EnD" secondAttribute="trailing" constant="10" id="DMX-C8-dJ5"/>
+                    <constraint firstItem="9Z9-Sc-1mM" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="5" id="DNN-uq-kA7"/>
+                    <constraint firstItem="xRN-qD-gGk" firstAttribute="leading" secondItem="9Z9-Sc-1mM" secondAttribute="leading" id="Mal-cg-Jb4"/>
+                    <constraint firstItem="xRN-qD-gGk" firstAttribute="top" secondItem="TPR-bY-EnD" secondAttribute="bottom" constant="21" id="N57-ET-3bA"/>
+                    <constraint firstItem="9Z9-Sc-1mM" firstAttribute="top" secondItem="Ehx-2c-V2X" secondAttribute="bottom" constant="21" id="ONg-74-5Hu"/>
+                    <constraint firstItem="Ehx-2c-V2X" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" constant="10" id="PbJ-jR-tpf"/>
+                    <constraint firstItem="fJj-hk-fmC" firstAttribute="top" secondItem="xRN-qD-gGk" secondAttribute="bottom" constant="10" id="Tc2-bl-f39"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="8h7-LR-K5J" secondAttribute="bottom" constant="30" id="WOj-pG-ifp"/>
+                    <constraint firstItem="Bwc-Ei-p21" firstAttribute="centerY" secondItem="Ehx-2c-V2X" secondAttribute="centerY" id="d0s-dh-gHt"/>
+                    <constraint firstItem="2up-VP-Eb4" firstAttribute="centerY" secondItem="8h7-LR-K5J" secondAttribute="centerY" id="d7k-oV-8E8"/>
+                    <constraint firstItem="TPR-bY-EnD" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="dkU-8h-JvU"/>
+                    <constraint firstItem="8h7-LR-K5J" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="fVw-7L-Ipo"/>
+                    <constraint firstAttribute="trailing" secondItem="Bwc-Ei-p21" secondAttribute="trailing" constant="10" id="flU-Ue-y8c"/>
+                    <constraint firstItem="TPR-bY-EnD" firstAttribute="top" secondItem="9Z9-Sc-1mM" secondAttribute="bottom" constant="10" id="hjA-TD-7zN"/>
+                    <constraint firstItem="8rQ-jM-bd4" firstAttribute="centerY" secondItem="8h7-LR-K5J" secondAttribute="centerY" id="mQ8-v4-Axp"/>
+                    <constraint firstItem="Bwc-Ei-p21" firstAttribute="leading" secondItem="Ehx-2c-V2X" secondAttribute="trailing" constant="20" id="vrK-n5-LJG"/>
+                    <constraint firstItem="fJj-hk-fmC" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" constant="10" id="zWN-po-Dpj"/>
+                </constraints>
+            </tableViewCellContentView>
+            <viewLayoutGuide key="safeArea" id="njF-e1-oar"/>
+            <connections>
+                <outlet property="dateLabel" destination="2up-VP-Eb4" id="jiD-K0-Rxy"/>
+                <outlet property="genreLabel" destination="fJj-hk-fmC" id="mRz-pX-Q3e"/>
+                <outlet property="likeButton" destination="8h7-LR-K5J" id="UIP-h8-L2d"/>
+                <outlet property="likeLabel" destination="8rQ-jM-bd4" id="y2f-mZ-1JY"/>
+                <outlet property="postContentLabel" destination="TPR-bY-EnD" id="lc7-Ps-kDe"/>
+                <outlet property="titleLabel" destination="Bwc-Ei-p21" id="k6E-sA-KlK"/>
+                <outlet property="userImage" destination="Ehx-2c-V2X" id="uqa-p8-Dm1"/>
+            </connections>
+            <point key="canvasLocation" x="152.17391304347828" y="286.94196428571428"/>
+        </tableViewCell>
+    </objects>
+    <resources>
+        <image name="like_none" width="40" height="40"/>
+    </resources>
+</document>
