@@ -16,18 +16,14 @@ class PostViewController: UIViewController, UITextViewDelegate, UIPickerViewDele
     
     @IBOutlet weak var postTitle: UITextField!
     @IBOutlet weak var qualification: UITextField!
-    @IBOutlet weak var zoomUrl: UITextField!
     @IBOutlet weak var postContent: UITextView!
     @IBOutlet weak var genre: UIPickerView!
     @IBOutlet weak var genreLabel: UILabel!
     @IBAction func handleCreatePostButton(_ sender: Any) {
-        if let postTitle = postTitle.text, let qualification = qualification.text, var zoomUrl = zoomUrl.text, let postContent = postContent.text, let genre = data1, let user = Auth.auth().currentUser {
+        if let postTitle = postTitle.text, let qualification = qualification.text, let postContent = postContent.text, let genre = data1, let user = Auth.auth().currentUser {
             
-            if zoomUrl == ""{
-                zoomUrl = "選択なし"
-            }
             //いずれかでも入力されていない時は何もしない
-            if postTitle.isEmpty || qualification.isEmpty || zoomUrl.isEmpty || postContent.isEmpty || genre.isEmpty{
+            if postTitle.isEmpty || qualification.isEmpty || postContent.isEmpty || genre.isEmpty{
                 print("DEBUG_PRINT: 何かが空文字です。")
                 return
             }
@@ -43,7 +39,6 @@ class PostViewController: UIViewController, UITextViewDelegate, UIPickerViewDele
                 "postUserUid": user.uid,
                 "postTitle": self.postTitle.text!,
                 "qualification": self.qualification.text!,
-                "zoomUrl": self.zoomUrl.text!,
                 "postContent": self.postContent.text!,
                 "genre": data1!,
                 "date": FieldValue.serverTimestamp(),

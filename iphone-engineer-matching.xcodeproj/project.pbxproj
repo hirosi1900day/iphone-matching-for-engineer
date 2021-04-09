@@ -34,6 +34,13 @@
 		F623607A2616CCE100C74916 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F62360792616CCE100C74916 /* 1.jpg */; };
 		F623607E2616D20100C74916 /* imageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F623607D2616D20100C74916 /* imageSelectViewController.swift */; };
 		F6F688992619A8C6001D611B /* FavoriteIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F688982619A8C6001D611B /* FavoriteIndexViewController.swift */; };
+		F6F688BA261D5E64001D611B /* UIColor-Extention.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F688B9261D5E64001D611B /* UIColor-Extention.swift */; };
+		F6F688BD261D66E1001D611B /* ChatRoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F688BC261D66E1001D611B /* ChatRoomViewController.swift */; };
+		F6F688CF261D7789001D611B /* ChatRoomTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6F688CE261D7789001D611B /* ChatRoomTableViewCell.xib */; };
+		F6F688D5261D78AD001D611B /* ChatListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F688D4261D78AD001D611B /* ChatListViewController.swift */; };
+		F6F688D8261D7C9F001D611B /* ChatRoomTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F688D7261D7C9F001D611B /* ChatRoomTableViewCell.swift */; };
+		F6F688E3261EC366001D611B /* ChatInputAccessoryView.xib in Resources */ = {isa = PBXBuildFile; fileRef = F6F688E2261EC366001D611B /* ChatInputAccessoryView.xib */; };
+		F6F688E7261EC67B001D611B /* ChatInputAccessoryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6F688E6261EC67A001D611B /* ChatInputAccessoryView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +75,13 @@
 		F62360792616CCE100C74916 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
 		F623607D2616D20100C74916 /* imageSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageSelectViewController.swift; sourceTree = "<group>"; };
 		F6F688982619A8C6001D611B /* FavoriteIndexViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteIndexViewController.swift; sourceTree = "<group>"; };
+		F6F688B9261D5E64001D611B /* UIColor-Extention.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor-Extention.swift"; sourceTree = "<group>"; };
+		F6F688BC261D66E1001D611B /* ChatRoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomViewController.swift; sourceTree = "<group>"; };
+		F6F688CE261D7789001D611B /* ChatRoomTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatRoomTableViewCell.xib; sourceTree = "<group>"; };
+		F6F688D4261D78AD001D611B /* ChatListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatListViewController.swift; sourceTree = "<group>"; };
+		F6F688D7261D7C9F001D611B /* ChatRoomTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoomTableViewCell.swift; sourceTree = "<group>"; };
+		F6F688E2261EC366001D611B /* ChatInputAccessoryView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ChatInputAccessoryView.xib; sourceTree = "<group>"; };
+		F6F688E6261EC67A001D611B /* ChatInputAccessoryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatInputAccessoryView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -120,35 +134,82 @@
 		F6235FF52614244400C74916 /* iphone-engineer-matching */ = {
 			isa = PBXGroup;
 			children = (
-				F6235FF62614244400C74916 /* AppDelegate.swift */,
-				F6235FF82614244400C74916 /* SceneDelegate.swift */,
-				F6235FFA2614244400C74916 /* ViewController.swift */,
-				F6235FFC2614244400C74916 /* Main.storyboard */,
-				F6F688982619A8C6001D611B /* FavoriteIndexViewController.swift */,
-				F6236051261476BD00C74916 /* TabBarController.swift */,
-				F623604626146CAB00C74916 /* ChatUserViewController.swift */,
+				F6F688E1261EC2CD001D611B /* Views */,
+				F6F688E0261EC27B001D611B /* Extentions */,
+				F6F688CA261D7703001D611B /* Controllers */,
+				F6F688DF261EC1DC001D611B /* StoryBoards */,
+				F6F688DD261EC1AB001D611B /* Xibs */,
+				F6F688D4261D78AD001D611B /* ChatListViewController.swift */,
 				F6235FFF2614244500C74916 /* Assets.xcassets */,
-				F62360012614244500C74916 /* LaunchScreen.storyboard */,
 				F623600B26142BE700C74916 /* GoogleService-Info.plist */,
 				F62360042614244500C74916 /* Info.plist */,
 				F62360792616CCE100C74916 /* 1.jpg */,
-				F62360282614662700C74916 /* SettingViewController.swift */,
-				F623607D2616D20100C74916 /* imageSelectViewController.swift */,
-				F623602B2614665B00C74916 /* HomeViewController.swift */,
-				F623602E261466BA00C74916 /* LoginViewController.swift */,
-				F6236031261466C800C74916 /* ChatViewController.swift */,
-				F62360342614671B00C74916 /* DetailsViewController.swift */,
-				F62360372614673C00C74916 /* ZoomViewController.swift */,
-				F623603A2614676800C74916 /* MypageViewController.swift */,
-				F623603D261467A700C74916 /* PostManagementViewController.swift */,
-				F6236040261467FD00C74916 /* UserDetailsViewController.swift */,
-				F62360432614686D00C74916 /* PostViewController.swift */,
+				F6235FF62614244400C74916 /* AppDelegate.swift */,
+				F6235FF82614244400C74916 /* SceneDelegate.swift */,
 				F62360762616C0E400C74916 /* Const.swift */,
 				F623606E2615979600C74916 /* postData.swift */,
-				F623607126159B5D00C74916 /* PostTableViewCell.swift */,
-				F623607226159B5D00C74916 /* PostTableViewCell.xib */,
 			);
 			path = "iphone-engineer-matching";
+			sourceTree = "<group>";
+		};
+		F6F688CA261D7703001D611B /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F62360282614662700C74916 /* SettingViewController.swift */,
+				F6236051261476BD00C74916 /* TabBarController.swift */,
+				F6F688BC261D66E1001D611B /* ChatRoomViewController.swift */,
+				F623604626146CAB00C74916 /* ChatUserViewController.swift */,
+				F6F688982619A8C6001D611B /* FavoriteIndexViewController.swift */,
+				F6235FFA2614244400C74916 /* ViewController.swift */,
+				F62360342614671B00C74916 /* DetailsViewController.swift */,
+				F623607D2616D20100C74916 /* imageSelectViewController.swift */,
+				F6236031261466C800C74916 /* ChatViewController.swift */,
+				F623602B2614665B00C74916 /* HomeViewController.swift */,
+				F623603D261467A700C74916 /* PostManagementViewController.swift */,
+				F62360372614673C00C74916 /* ZoomViewController.swift */,
+				F623602E261466BA00C74916 /* LoginViewController.swift */,
+				F623603A2614676800C74916 /* MypageViewController.swift */,
+				F62360432614686D00C74916 /* PostViewController.swift */,
+				F6236040261467FD00C74916 /* UserDetailsViewController.swift */,
+				F6F688D7261D7C9F001D611B /* ChatRoomTableViewCell.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F6F688DD261EC1AB001D611B /* Xibs */ = {
+			isa = PBXGroup;
+			children = (
+				F6F688CE261D7789001D611B /* ChatRoomTableViewCell.xib */,
+				F623607226159B5D00C74916 /* PostTableViewCell.xib */,
+				F6F688E2261EC366001D611B /* ChatInputAccessoryView.xib */,
+			);
+			path = Xibs;
+			sourceTree = "<group>";
+		};
+		F6F688DF261EC1DC001D611B /* StoryBoards */ = {
+			isa = PBXGroup;
+			children = (
+				F62360012614244500C74916 /* LaunchScreen.storyboard */,
+				F6235FFC2614244400C74916 /* Main.storyboard */,
+			);
+			path = StoryBoards;
+			sourceTree = "<group>";
+		};
+		F6F688E0261EC27B001D611B /* Extentions */ = {
+			isa = PBXGroup;
+			children = (
+				F6F688B9261D5E64001D611B /* UIColor-Extention.swift */,
+			);
+			path = Extentions;
+			sourceTree = "<group>";
+		};
+		F6F688E1261EC2CD001D611B /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F623607126159B5D00C74916 /* PostTableViewCell.swift */,
+				F6F688E6261EC67A001D611B /* ChatInputAccessoryView.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -212,6 +273,8 @@
 			files = (
 				F62360032614244500C74916 /* LaunchScreen.storyboard in Resources */,
 				F623607426159B5D00C74916 /* PostTableViewCell.xib in Resources */,
+				F6F688E3261EC366001D611B /* ChatInputAccessoryView.xib in Resources */,
+				F6F688CF261D7789001D611B /* ChatRoomTableViewCell.xib in Resources */,
 				F62360002614244500C74916 /* Assets.xcassets in Resources */,
 				F6235FFE2614244400C74916 /* Main.storyboard in Resources */,
 				F623600C26142BE700C74916 /* GoogleService-Info.plist in Resources */,
@@ -272,6 +335,8 @@
 				F62360382614673C00C74916 /* ZoomViewController.swift in Sources */,
 				F623607326159B5D00C74916 /* PostTableViewCell.swift in Sources */,
 				F6236041261467FD00C74916 /* UserDetailsViewController.swift in Sources */,
+				F6F688BA261D5E64001D611B /* UIColor-Extention.swift in Sources */,
+				F6F688D5261D78AD001D611B /* ChatListViewController.swift in Sources */,
 				F6236052261476BD00C74916 /* TabBarController.swift in Sources */,
 				F6F688992619A8C6001D611B /* FavoriteIndexViewController.swift in Sources */,
 				F62360442614686D00C74916 /* PostViewController.swift in Sources */,
@@ -285,8 +350,11 @@
 				F6236032261466C800C74916 /* ChatViewController.swift in Sources */,
 				F6235FF72614244400C74916 /* AppDelegate.swift in Sources */,
 				F6235FF92614244400C74916 /* SceneDelegate.swift in Sources */,
+				F6F688BD261D66E1001D611B /* ChatRoomViewController.swift in Sources */,
 				F62360292614662700C74916 /* SettingViewController.swift in Sources */,
 				F62360772616C0E400C74916 /* Const.swift in Sources */,
+				F6F688D8261D7C9F001D611B /* ChatRoomTableViewCell.swift in Sources */,
+				F6F688E7261EC67B001D611B /* ChatInputAccessoryView.swift in Sources */,
 				F623607E2616D20100C74916 /* imageSelectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

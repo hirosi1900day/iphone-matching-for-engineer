@@ -35,6 +35,7 @@ class PostTableViewCell: UITableViewCell {
             userImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
             let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postData.postUserUid! + ".jpg")
             userImage.sd_setImage(with: imageRef)
+
         }
         
         // タイトルの表示

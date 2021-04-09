@@ -16,6 +16,7 @@ class FavoriteIndexViewController: UIViewController, UITableViewDelegate, UITabl
     var listener: ListenerRegistration?
     
     @IBOutlet weak var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.

@@ -9,9 +9,14 @@ import UIKit
 import Firebase
 import SVProgressHUD
 
-class SettingViewController: UIViewController {
+class SettingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var image: UIImage!
+    //取得配列を入れておく
+    var postArray: [PostData] = []
+    // Firestoreのリスナー
+    var listener: ListenerRegistration?
     
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var displayNameTextField: UITextField!
     @IBAction func handleUserImageButton(_ sender: Any) {
@@ -77,6 +82,13 @@ class SettingViewController: UIViewController {
         // ログイン画面から戻ってきた時のためにホーム画面（index = 0）を選択している状態にしておく
         tabBarController?.selectedIndex = 0
     }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        tableView.delegate = self
+        tableView.dataSource = self
+        
+    }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -89,6 +101,79 @@ class SettingViewController: UIViewController {
         if image != nil {
             userImage.image = image
         }
+        // ログイン済みか確認
+        if let myid = Auth.auth().currentUser?.uid {
+            // listenerを登録して投稿データの更新を監視する
+            let postsRef = Firestore.firestore().collection(Const.PostPath)
+                .whereField("postUserUid", isEqualTo: myid)
+            print("postReg中身\(postsRef)")
+            listener = postsRef.addSnapshotListener() { (querySnapshot, error) in
+                if let error = error {
+                    print("DEBUG_PRINT: snapshotの取得が失敗しました。 \(error)")
+                    return
+                }
+                //取得したdocumentをもとにPostDataを作成し、postArrayの配列にする。
+                self.postArray = querySnapshot!.documents.map { document in
+                    print("DEBUG_PRINT: document取得 \(document.documentID)")
+                    let postData = PostData(document: document)
+                    return postData
+                }
+                // TableViewの表示を更新する
+                self.tableView.reloadData()
+            }
+        }
+    }
+    // segue で画面遷移する時に呼ばれる
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
+        let PostManagementViewController:PostManagementViewController = segue.destination as! PostManagementViewController
+        
+        if segue.identifier == "MyPostDetail" {
+            let indexPath = self.tableView.indexPathForSelectedRow
+            PostManagementViewController.postData = postArray[indexPath!.row]
+        } else {
+            return
+        }
+        
+    }
+
+// データの数（＝セルの数）を返すメソッド
+func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return self.postArray.count
+    }
+    
+    // 各セルの内容を返すメソッド
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        // 再利用可能な cell を得る
+        let cell = tableView.dequeueReusableCell(withIdentifier: "MyPageCell", for: indexPath)
+        
+        cell.textLabel?.text = postArray[indexPath.row].postTitle
+        
+        return cell
+    }
+    
+    // 各セルを選択した時に実行されるメソッド
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        //詳細画面に飛ばす
+        performSegue(withIdentifier: "MyPostDetail",sender: nil)
+    }
+    
+    // セルが削除が可能なことを伝えるメソッド
+    func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath)-> UITableViewCell.EditingStyle {
+        return .delete
+    }
+    
+    // Delete ボタンが押された時に呼ばれるメソッド
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        
+        if editingStyle == .delete {
+            // 配列からタップされたインデックスのデータを取り出す
+            let postData = postArray[indexPath.row]
+            // likesに更新データを書き込む
+            let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
+            postRef.delete()
+            
+            
+        }
     }
     
     
@@ -100,6 +185,7 @@ class SettingViewController: UIViewController {
      // Get the new view controller using segue.destination.
      // Pass the selected object to the new view controller.
      }
-    */
-
+     */
+    
+    
 }
