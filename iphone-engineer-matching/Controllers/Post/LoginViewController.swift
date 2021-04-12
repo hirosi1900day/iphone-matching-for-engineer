@@ -70,6 +70,8 @@ class LoginViewController: UIViewController {
                         self.dismiss(animated: true, completion: nil)
                     }
                 }
+                self.createUserForFirebase(email: address, username: displayName)
+                
             }
         }
     }
@@ -78,6 +80,20 @@ class LoginViewController: UIViewController {
         print("ログインコントローラー")
         // Do any additional setup after loading the view.
     }
+    
+    private func createUserForFirebase(email: String,username: String) {
+        let docData = [
+            "email": email,
+            "username": username,
+            "createdAt": Timestamp(),
+        ] as [String : Any]
+        var uid = Auth.auth().currentUser?.uid
+        Firestore.firestore().collection("users").document(uid!).setData(docData) { (err) in
+            if let err = err {
+                print("Firestoreへの保存に失敗しました。\(err)")
+                return
+            }
+        }
     
     
     /*
@@ -90,4 +106,5 @@ class LoginViewController: UIViewController {
     }
     */
 
+}
 }

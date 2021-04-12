@@ -19,6 +19,10 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var displayNameTextField: UITextField!
+    @IBOutlet weak var userImageChangeButton: UIButton!
+    @IBOutlet weak var settingUpdateButton: UIButton!
+    @IBOutlet weak var logoutButton: UIButton!
+    
     @IBAction func handleUserImageButton(_ sender: Any) {
         //imageSelectViewControllerに画面遷移する
         let imageSelectViewController = self.storyboard?.instantiateViewController(withIdentifier: "imageSelect") as! imageSelectViewController
@@ -97,6 +101,11 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         if let user = user {
             displayNameTextField.text = user.displayName
         }
+        //角を丸める
+        userImageChangeButton.layer.cornerRadius = 10
+        settingUpdateButton.layer.cornerRadius = 10
+        logoutButton.layer.cornerRadius = 10
+        userImage.layer.cornerRadius = 50
         //画像がセットされた表示する
         if image != nil {
             userImage.image = image

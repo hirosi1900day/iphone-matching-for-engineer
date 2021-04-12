@@ -97,7 +97,8 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         let DetailsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Detail") as! DetailsViewController
         
         DetailsViewController.postData = searchResult[indexPath.row]
-        self.present(DetailsViewController, animated: true, completion: nil)
+        navigationController?.pushViewController(DetailsViewController, animated: true)
+//        self.present(DetailsViewController, animated: true, completion: nil)
     }
     
     //検索ボタン押下時の呼び出しメソッド

@@ -9,23 +9,28 @@ import UIKit
 import Firebase
 import SVProgressHUD
 
-class PostManagementViewController: UIViewController,UIPickerViewDelegate, UIPickerViewDataSource {
+class PostManagementViewController: UIViewController, UIPickerViewDelegate, UIPickerViewDataSource {
+    
     let dataList = [["起業","お仲間探し","趣味開発","その他"]]
     var postData: PostData!
     var data1: String?
-    
+
     @IBOutlet weak var postTitleTextField: UITextField!
-    @IBOutlet weak var postContentTextField: UITextField!
-    @IBOutlet weak var qualificationTextField: UITextField!
+
+
+    @IBOutlet weak var postContentTextView: UITextView!
+
+    @IBOutlet weak var qualificationTextView: UITextView!
+
     @IBOutlet weak var genrePicker: UIPickerView!
     @IBOutlet weak var genreLabel: UILabel!
-   
-    
-    
+
+
+
     @IBAction func postUpdate(_ sender: Any) {
-    
+
     print("アップデート前")
-        if let postTitle = postTitleTextField.text, let qualification = qualificationTextField.text, let postContent = postContentTextField.text, let user = Auth.auth().currentUser {
+        if let postTitle = postTitleTextField.text, let qualification = qualificationTextView.text, let postContent = postContentTextView.text, let user = Auth.auth().currentUser {
             print("中にはいいて")
             //いずれかでも入力されていない時は何もしない
             if postTitle.isEmpty || qualification.isEmpty || postContent.isEmpty {
@@ -33,11 +38,11 @@ class PostManagementViewController: UIViewController,UIPickerViewDelegate, UIPic
                 return
             }
             //ジャンルに入力がない場合は元の文字列を入れる
-           
+
             if  data1 == nil{
                 self.data1 = postData.genre!
             }
-            
+
             print("アップデート実行中")
             // 投稿データの保存場所を定義する
             let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
@@ -60,12 +65,12 @@ class PostManagementViewController: UIViewController,UIPickerViewDelegate, UIPic
             // 投稿処理が完了したので先頭画面に戻る
             UIApplication.shared.windows.first{ $0.isKeyWindow }?.rootViewController?.dismiss(animated: true, completion: nil)
         }
-        
+
     }
     @IBAction func postUpdateCancel(_ sender: Any) {
         print("キャンセル")
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setPostData(_postData: postData)
@@ -75,17 +80,17 @@ class PostManagementViewController: UIViewController,UIPickerViewDelegate, UIPic
     }
     // PostDataの内容をセルに表示
     func setPostData(_postData: PostData) {
-        
+
         // タイトルの表示
         self.postTitleTextField.text = "\(postData.postTitle!)"
-        
+
         // 募集内容の表示
-        self.postContentTextField.text = "\(postData.postContent!)"
-        
+        self.postContentTextView.text = "\(postData.postContent!)"
+
         // 応募資格の表示
-        self.qualificationTextField.text = "\(postData.qualification!)"
-        
-        
+        self.qualificationTextView.text = "\(postData.qualification!)"
+
+
         // ジャンルの表示
         self.genreLabel.text = "\(postData.genre!)"
     }
@@ -93,30 +98,30 @@ class PostManagementViewController: UIViewController,UIPickerViewDelegate, UIPic
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return dataList.count
     }
-    
-    
+
+
     //コンポーネントに含まれるデータの個数を返すメソッド
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
         return dataList[component].count
     }
-    
-    
+
+
     //データを返すメソッド
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
         return dataList[component][row]
     }
-    
-    
+
+
     //データ選択時の呼び出しメソッド
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+
         //コンポーネントごとに現在選択されているデータを取得する。
         data1 = self.pickerView(pickerView, titleForRow: pickerView.selectedRow(inComponent: 0), forComponent: 0)
-        
+
         genreLabel.text = "選択　\(data1!)"
     }
-    
-    
+
+
 
     /*
     // MARK: - Navigation

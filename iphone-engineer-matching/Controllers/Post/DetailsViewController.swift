@@ -12,6 +12,8 @@ import FirebaseUI
 class DetailsViewController: UIViewController {
     
     var postData: PostData!
+    private var users = [User]()
+    private var selectedUser: User?
     
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var titleLabel: UILabel!
@@ -21,9 +23,35 @@ class DetailsViewController: UIViewController {
     
     @IBAction func handleToChatView(_ sender: Any) {
         
-       
-        let ChatViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChatView") as! ChatViewController
-        self.present(ChatViewController, animated: true, completion: nil)
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        guard let partnerUid = postData.postUserUid else { return }
+        let memebers = [uid, partnerUid]
+        
+        let docData = [
+            "memebers": memebers,
+            "latestMessageId": "",
+            "createdAt": Timestamp()
+        ] as [String : Any]
+        
+        if uid == partnerUid {
+            return
+        }
+        
+        Firestore.firestore().collection("chatRooms").addDocument(data: docData) { (err) in
+            if let err = err {
+                print("ChatRoom情報の保存に失敗しました。\(err)")
+                return
+            }
+//
+////            self.dismiss(animated: true, completion: nil)
+            print("ChatRoom情報の保存に成功しました。")
+
+        }
+        
+//        let ChatViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChatView") as! ChatViewController
+//        self.present(ChatViewController, animated: true, completion: nil)
+        
+        
     }
     
     @IBAction func handleBackButton(_ sender: Any) {
