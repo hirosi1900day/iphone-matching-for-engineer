@@ -91,6 +91,10 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Do any additional setup after loading the view.
         tableView.delegate = self
         tableView.dataSource = self
+        navigationController?.navigationBar.barTintColor = .rgb(red: 39, green: 49, blue: 69)
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
         
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -132,19 +136,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             }
         }
     }
-    // segue で画面遷移する時に呼ばれる
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?){
-        let PostManagementViewController:PostManagementViewController = segue.destination as! PostManagementViewController
-        
-        if segue.identifier == "MyPostDetail" {
-            let indexPath = self.tableView.indexPathForSelectedRow
-            PostManagementViewController.postData = postArray[indexPath!.row]
-        } else {
-            return
-        }
-        
-    }
-
+    
 // データの数（＝セルの数）を返すメソッド
 func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.postArray.count
@@ -162,8 +154,9 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
     
     // 各セルを選択した時に実行されるメソッド
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //詳細画面に飛ばす
-        performSegue(withIdentifier: "MyPostDetail",sender: nil)
+        let PostManagementViewController = self.storyboard?.instantiateViewController(withIdentifier: "PostManagement") as! PostManagementViewController
+        PostManagementViewController.postData = postArray[indexPath.row]
+        navigationController?.pushViewController(PostManagementViewController, animated: true)
     }
     
     // セルが削除が可能なことを伝えるメソッド
@@ -184,17 +177,5 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
             
         }
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
     
 }

@@ -12,7 +12,10 @@ import FirebaseUI
 class DetailsViewController: UIViewController {
     
     var postData: PostData!
+   
+    private var user: User?
     private var users = [User]()
+    private var chatrooms = [ChatRoom]()
     private var selectedUser: User?
     
     @IBOutlet weak var userImage: UIImageView!
@@ -33,27 +36,17 @@ class DetailsViewController: UIViewController {
             "createdAt": Timestamp()
         ] as [String : Any]
         
+        let partnerUser = [
+            "partnerUid": partnerUid
+        ] as [String : Any]
+        
         if uid == partnerUid {
             return
         }
-        
-        Firestore.firestore().collection("chatRooms").addDocument(data: docData) { (err) in
-            if let err = err {
-                print("ChatRoom情報の保存に失敗しました。\(err)")
-                return
-            }
-//
-////            self.dismiss(animated: true, completion: nil)
-            print("ChatRoom情報の保存に成功しました。")
-
-        }
-        
-//        let ChatViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChatView") as! ChatViewController
-//        self.present(ChatViewController, animated: true, completion: nil)
-        
-        
+        self.CheckAndMoveChatRoom(uid: uid, partnerUid: partnerUid,docData: docData)
     }
     
+            
     @IBAction func handleBackButton(_ sender: Any) {
         //戻る
         self.dismiss(animated: true, completion: nil)
@@ -62,7 +55,90 @@ class DetailsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setPostData(_postData: postData)
-        // Do any additional setup after loading the view.
+        navigationItem.title = "詳細ページ"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        fetchLoginUserInfo()
+    }
+    
+    private func CheckAndMoveChatRoom(uid: String, partnerUid: String, docData: [String : Any]) {
+        
+        Firestore.firestore().collection("chatRooms").getDocuments() {(Snapshot, err) in
+            if let err = err {
+                print("Error getting documents: \(err)")
+            } else {
+                for document in Snapshot!.documents {
+                    print("\(document.documentID) => \(document.data())")
+                    let dic = document.data()
+                    let chatroom = ChatRoom(dic: dic)
+                    chatroom.documentId = document.documentID
+                    if chatroom.memebers.contains(uid) && chatroom.memebers.contains(partnerUid) {
+                        
+                        let ChatRoomViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChatRoomViewController") as! ChatRoomViewController
+                        ChatRoomViewController.user = self.user
+                        ChatRoomViewController.chatroom = chatroom
+                        self.navigationController?.pushViewController(ChatRoomViewController, animated: true)
+                        return
+                    }
+                }
+                self.makeChatRoom(docData: docData)
+            }
+        }
+        
+        
+    }
+    
+    private func makeChatRoom(docData: [String: Any]) {
+       
+        let chatRoomId = randomString(length: 20)
+        Firestore.firestore().collection("chatRooms").document(chatRoomId).setData (docData) { (err) in
+            if let err = err {
+                print("ChatRoom情報の保存に失敗しました。\(err)")
+                return
+            }else{
+                Firestore.firestore().collection("chatRooms").document(chatRoomId).getDocument { (Snapshot, err) in
+                    if let err = err {
+                        print("ユーザー情報の取得に失敗しました。\(err)")
+                        return
+                    }
+                    guard let dic = Snapshot?.data() else { return }
+                    let chatroom = ChatRoom(dic: dic)
+                    chatroom.documentId = Snapshot?.documentID
+                    
+                    let ChatRoomViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChatRoom") as! ChatRoomViewController
+                    ChatRoomViewController.user = self.user
+                    ChatRoomViewController.chatroom = chatroom
+                    self.navigationController?.pushViewController(ChatRoomViewController, animated: true)
+                }
+            }
+        }
+    }
+    private func fetchLoginUserInfo() {
+        guard let uid = Auth.auth().currentUser?.uid else { return }
+        
+        Firestore.firestore().collection("users").document(uid).getDocument { (snapshot, err) in
+            if let err = err {
+                print("ユーザー情報の取得に失敗しました。\(err)")
+                return
+            }
+            
+            guard let snapshot = snapshot, let dic = snapshot.data() else { return }
+            
+            let user = User(dic: dic)
+            self.user = user
+        }
+    }
+    //ランダムな文字列を表示する
+    private func randomString(length: Int) -> String {
+        let letters : NSString = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+        let len = UInt32(letters.length)
+        
+        var randomString = ""
+        for _ in 0 ..< length {
+            let rand = arc4random_uniform(len)
+            var nextChar = letters.character(at: Int(rand))
+            randomString += NSString(characters: &nextChar, length: 1) as String
+        }
+        return randomString
     }
     // PostDataの内容をセルに表示
     func setPostData(_postData: PostData) {

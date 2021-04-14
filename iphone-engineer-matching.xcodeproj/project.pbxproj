@@ -18,14 +18,12 @@
 		F62360292614662700C74916 /* SettingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62360282614662700C74916 /* SettingViewController.swift */; };
 		F623602C2614665B00C74916 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F623602B2614665B00C74916 /* HomeViewController.swift */; };
 		F623602F261466BA00C74916 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F623602E261466BA00C74916 /* LoginViewController.swift */; };
-		F6236032261466C800C74916 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6236031261466C800C74916 /* ChatViewController.swift */; };
 		F62360352614671B00C74916 /* DetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62360342614671B00C74916 /* DetailsViewController.swift */; };
 		F62360382614673C00C74916 /* ZoomViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62360372614673C00C74916 /* ZoomViewController.swift */; };
 		F623603B2614676800C74916 /* MypageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F623603A2614676800C74916 /* MypageViewController.swift */; };
 		F623603E261467A700C74916 /* PostManagementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F623603D261467A700C74916 /* PostManagementViewController.swift */; };
 		F6236041261467FD00C74916 /* UserDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6236040261467FD00C74916 /* UserDetailsViewController.swift */; };
 		F62360442614686D00C74916 /* PostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62360432614686D00C74916 /* PostViewController.swift */; };
-		F623604726146CAB00C74916 /* ChatUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F623604626146CAB00C74916 /* ChatUserViewController.swift */; };
 		F6236052261476BD00C74916 /* TabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F6236051261476BD00C74916 /* TabBarController.swift */; };
 		F623606F2615979600C74916 /* postData.swift in Sources */ = {isa = PBXBuildFile; fileRef = F623606E2615979600C74916 /* postData.swift */; };
 		F623607326159B5D00C74916 /* PostTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F623607126159B5D00C74916 /* PostTableViewCell.swift */; };
@@ -62,14 +60,12 @@
 		F62360282614662700C74916 /* SettingViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingViewController.swift; sourceTree = "<group>"; };
 		F623602B2614665B00C74916 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
 		F623602E261466BA00C74916 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
-		F6236031261466C800C74916 /* ChatViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		F62360342614671B00C74916 /* DetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailsViewController.swift; sourceTree = "<group>"; };
 		F62360372614673C00C74916 /* ZoomViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ZoomViewController.swift; sourceTree = "<group>"; };
 		F623603A2614676800C74916 /* MypageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MypageViewController.swift; sourceTree = "<group>"; };
 		F623603D261467A700C74916 /* PostManagementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostManagementViewController.swift; sourceTree = "<group>"; };
 		F6236040261467FD00C74916 /* UserDetailsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserDetailsViewController.swift; sourceTree = "<group>"; };
 		F62360432614686D00C74916 /* PostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewController.swift; sourceTree = "<group>"; };
-		F623604626146CAB00C74916 /* ChatUserViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatUserViewController.swift; sourceTree = "<group>"; };
 		F6236051261476BD00C74916 /* TabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabBarController.swift; sourceTree = "<group>"; };
 		F623606E2615979600C74916 /* postData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = postData.swift; sourceTree = "<group>"; };
 		F623607126159B5D00C74916 /* PostTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostTableViewCell.swift; sourceTree = "<group>"; };
@@ -172,8 +168,6 @@
 			isa = PBXGroup;
 			children = (
 				F6F688BC261D66E1001D611B /* ChatRoomViewController.swift */,
-				F623604626146CAB00C74916 /* ChatUserViewController.swift */,
-				F6236031261466C800C74916 /* ChatViewController.swift */,
 				F6F688D4261D78AD001D611B /* ChatListViewController.swift */,
 			);
 			path = Chat;
@@ -382,8 +376,6 @@
 				F623603E261467A700C74916 /* PostManagementViewController.swift in Sources */,
 				F623606F2615979600C74916 /* postData.swift in Sources */,
 				F623603B2614676800C74916 /* MypageViewController.swift in Sources */,
-				F623604726146CAB00C74916 /* ChatUserViewController.swift in Sources */,
-				F6236032261466C800C74916 /* ChatViewController.swift in Sources */,
 				F6235FF72614244400C74916 /* AppDelegate.swift in Sources */,
 				F6235FF92614244400C74916 /* SceneDelegate.swift in Sources */,
 				F6F688BD261D66E1001D611B /* ChatRoomViewController.swift in Sources */,

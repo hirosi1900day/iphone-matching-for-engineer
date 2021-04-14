@@ -38,6 +38,10 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         // カスタムセルを登録する
         let nib = UINib(nibName: "PostTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "Cell")
+        
+        setUpNavgation()
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -131,6 +135,12 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         }
         //テーブルを再読み込みする。
         tableView.reloadData()
+    }
+    
+    private func setUpNavgation() {
+        navigationController?.navigationBar.barTintColor = .rgb(red: 39, green: 49, blue: 69)
+        navigationItem.title = "一覧"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
     }
     
     @objc func handleLikeButton(_ sender: UIButton, forEvent event: UIEvent) {
