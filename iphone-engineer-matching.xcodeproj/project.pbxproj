@@ -30,7 +30,6 @@
 		F623607426159B5D00C74916 /* PostTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F623607226159B5D00C74916 /* PostTableViewCell.xib */; };
 		F62360772616C0E400C74916 /* Const.swift in Sources */ = {isa = PBXBuildFile; fileRef = F62360762616C0E400C74916 /* Const.swift */; };
 		F623607A2616CCE100C74916 /* 1.jpg in Resources */ = {isa = PBXBuildFile; fileRef = F62360792616CCE100C74916 /* 1.jpg */; };
-		F623607E2616D20100C74916 /* imageSelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F623607D2616D20100C74916 /* imageSelectViewController.swift */; };
 		F677171326229E9200D0C2F6 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F677171226229E9200D0C2F6 /* User.swift */; };
 		F67717172622A30700D0C2F6 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = F67717162622A30700D0C2F6 /* ChatRoom.swift */; };
 		F677171F2624499600D0C2F6 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = F677171E2624499600D0C2F6 /* Message.swift */; };
@@ -72,7 +71,6 @@
 		F623607226159B5D00C74916 /* PostTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = PostTableViewCell.xib; sourceTree = "<group>"; };
 		F62360762616C0E400C74916 /* Const.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Const.swift; sourceTree = "<group>"; };
 		F62360792616CCE100C74916 /* 1.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = 1.jpg; sourceTree = "<group>"; };
-		F623607D2616D20100C74916 /* imageSelectViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = imageSelectViewController.swift; sourceTree = "<group>"; };
 		F677171226229E9200D0C2F6 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F67717162622A30700D0C2F6 /* ChatRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		F677171E2624499600D0C2F6 /* Message.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -180,7 +178,6 @@
 				F62360282614662700C74916 /* SettingViewController.swift */,
 				F6F688982619A8C6001D611B /* FavoriteIndexViewController.swift */,
 				F6235FFA2614244400C74916 /* ViewController.swift */,
-				F623607D2616D20100C74916 /* imageSelectViewController.swift */,
 				F62360342614671B00C74916 /* DetailsViewController.swift */,
 				F623603D261467A700C74916 /* PostManagementViewController.swift */,
 				F623602B2614665B00C74916 /* HomeViewController.swift */,
@@ -383,7 +380,6 @@
 				F62360772616C0E400C74916 /* Const.swift in Sources */,
 				F6F688D8261D7C9F001D611B /* ChatRoomTableViewCell.swift in Sources */,
 				F6F688E7261EC67B001D611B /* ChatInputAccessoryView.swift in Sources */,
-				F623607E2616D20100C74916 /* imageSelectViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

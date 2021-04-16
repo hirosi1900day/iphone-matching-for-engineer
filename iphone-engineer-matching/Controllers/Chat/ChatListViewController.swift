@@ -11,7 +11,7 @@ import FirebaseUI
 
 class ChatListViewController: UIViewController {
     
-    private var chatroooms = [ChatRoom]()
+    private var chatrooms = [ChatRoom]()
     private let cellId = "cellId"
     private var user: User? 
     
@@ -50,6 +50,7 @@ class ChatListViewController: UIViewController {
                 print("ChatRooms情報の取得に失敗しました。\(err)")
                 return
             }
+            self.chatrooms = [ChatRoom]()
             snapshots?.documentChanges.forEach({ (documentChange) in
                 switch documentChange.type {
                 case .added:
@@ -83,14 +84,15 @@ class ChatListViewController: UIViewController {
                     
                     guard let dic = userSnapshot?.data() else { return }
                     let user = User(dic: dic)
-                    user.uid = documentChange.document.documentID
+//                    user.uid = documentChange.document.documentID
+                    user.uid = memberUid
                     chatroom.partnerUser = user
                     
                     guard let chatroomId = chatroom.documentId else { return }
                     let latestMessageId = chatroom.latestMessageId
                     
                     if latestMessageId == "" {
-                        self.chatroooms.append(chatroom)
+                        self.chatrooms.append(chatroom)
                         self.chatListTableView.reloadData()
                         return
                     }
@@ -106,7 +108,7 @@ class ChatListViewController: UIViewController {
                         let message = Message(dic: dic)
                         chatroom.latestMessage = message
                         
-                        self.chatroooms.append(chatroom)
+                        self.chatrooms.append(chatroom)
                         self.chatListTableView.reloadData()
                     }
                 }
@@ -142,13 +144,13 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return chatroooms.count
+        return chatrooms.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = chatListTableView.dequeueReusableCell(withIdentifier: cellId, for: indexPath) as! ChatListTableViewCell
-        cell.chatroom = chatroooms[indexPath.row]
-        cell.setImage(UserId: chatroooms[indexPath.row].partnerUser?.uid as! String)
+        cell.chatroom = chatrooms[indexPath.row]
+        cell.setImage(UserId: chatrooms[indexPath.row].partnerUser?.uid as! String)
         return cell
     }
     
@@ -156,7 +158,7 @@ extension ChatListViewController: UITableViewDelegate, UITableViewDataSource {
         
         let ChatRoomViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChatRoomViewController") as! ChatRoomViewController
         ChatRoomViewController.user = user
-        ChatRoomViewController.chatroom = chatroooms[indexPath.row]
+        ChatRoomViewController.chatroom = chatrooms[indexPath.row]
         navigationController?.pushViewController(ChatRoomViewController, animated: true)
         
     }
@@ -173,6 +175,10 @@ class ChatListTableViewCell: UITableViewCell {
                 dateLabel.text = dateFormatterForDateLabel(date: chatroom.createdAt.dateValue())
                 dateLabel.text = dateFormatterForDateLabel(date: chatroom.latestMessage?.createdAt.dateValue() ?? Date())
                 latestMessageLabel.text = chatroom.latestMessage?.message
+                if let uid = chatroom.partnerUser?.uid {
+                    print("確認\(uid)")
+                    self.setImage(UserId: uid)
+                }
             }
         }
     }

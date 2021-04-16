@@ -33,7 +33,7 @@ class FavoriteIndexViewController: UIViewController, UITableViewDelegate, UITabl
         if let myid = Auth.auth().currentUser?.uid {
             // listenerを登録して投稿データの更新を監視する
             let postsRef = Firestore.firestore().collection(Const.PostPath)
-                .whereField("likes", isEqualTo: [myid])
+                .whereField("likes", arrayContains: myid)
             print("postReg中身\(postsRef)")
             listener = postsRef.addSnapshotListener() { (querySnapshot, error) in
                 if let error = error {

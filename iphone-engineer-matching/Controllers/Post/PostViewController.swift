@@ -23,11 +23,11 @@ class PostViewController: UIViewController, UITextViewDelegate, UIPickerViewDele
         if let postTitle = postTitle.text, let qualification = qualification.text, let postContent = postContent.text, let genre = data1, let user = Auth.auth().currentUser {
             
             //いずれかでも入力されていない時は何もしない
-            if postTitle.isEmpty || qualification.isEmpty || postContent.isEmpty || genre.isEmpty{
+            if postTitle.isEmpty || qualification.isEmpty || postContent.isEmpty || genre.isEmpty {
                 print("DEBUG_PRINT: 何かが空文字です。")
                 return
             }
-            
+
             // 投稿データの保存場所を定義する
             let postRef = Firestore.firestore().collection(Const.PostPath).document()
             // HUDで投稿処理中の表示を開始
@@ -59,6 +59,7 @@ class PostViewController: UIViewController, UITextViewDelegate, UIPickerViewDele
         //ビューを作成する。
         genre.delegate = self
         genre.dataSource = self
+        genre.selectRow(0, inComponent: 0, animated: true)
         // Do any additional setup after loading the view.
     }
     
@@ -90,16 +91,5 @@ class PostViewController: UIViewController, UITextViewDelegate, UIPickerViewDele
         genreLabel.text = "選択　\(data1!)"
     }
     
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

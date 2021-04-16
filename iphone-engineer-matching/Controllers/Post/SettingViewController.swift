@@ -7,9 +7,11 @@
 
 import UIKit
 import Firebase
+import FirebaseUI
 import SVProgressHUD
+import CLImageEditor
 
-class SettingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class SettingViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIImagePickerControllerDelegate, UINavigationControllerDelegate, CLImageEditorDelegate {
     var image: UIImage!
     //取得配列を入れておく
     var postArray: [PostData] = []
@@ -20,16 +22,54 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var displayNameTextField: UITextField!
     @IBOutlet weak var userImageChangeButton: UIButton!
-    @IBOutlet weak var settingUpdateButton: UIButton!
-    @IBOutlet weak var logoutButton: UIButton!
     
+    @IBOutlet weak var settingUpdateButton: UIBarButtonItem!
+    
+    @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBAction func handleUserImageButton(_ sender: Any) {
-        //imageSelectViewControllerに画面遷移する
-        let imageSelectViewController = self.storyboard?.instantiateViewController(withIdentifier: "imageSelect") as! imageSelectViewController
-        imageSelectViewController.modalPresentationStyle = .fullScreen
-        present(imageSelectViewController, animated: true, completion: nil)
+        //        //imageSelectViewControllerに画面遷移する
+        //        let imageSelectViewController = self.storyboard?.instantiateViewController(withIdentifier: "imageSelect") as! imageSelectViewController
+        //        imageSelectViewController.modalPresentationStyle = .fullScreen
+        //        present(imageSelectViewController, animated: true, completion: nil)
+        
+        imageSelectActionSheet()
     }
     @IBAction func handleChangeButton(_ sender: Any) {
+        changeButtonAction()
+    }
+    @IBAction func handleLogoutButton(_ sender: Any) {
+        logoutAction()
+    }
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        // Do any additional setup after loading the view.
+        tableView.delegate = self
+        tableView.dataSource = self
+        navigationController?.navigationBar.barTintColor = .rgb(red: 39, green: 49, blue: 69)
+        navigationController?.navigationBar.tintColor = .white
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        
+        // 画像の表示
+        if let uid = Auth.auth().currentUser?.uid{
+            userImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+            let imageRef = Storage.storage().reference().child(Const.ImagePath).child(uid  + ".jpg")
+            userImage.sd_setImage(with: imageRef)
+        }
+    }
+    
+    private func logoutAction() {
+        // ログアウトする
+        try! Auth.auth().signOut()
+        
+        // ログイン画面を表示する
+        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Login")
+        self.present(loginViewController!, animated: true, completion: nil)
+        
+        // ログイン画面から戻ってきた時のためにホーム画面（index = 0）を選択している状態にしておく
+        tabBarController?.selectedIndex = 0
+    }
+    
+    private func changeButtonAction() {
         if let displayName = displayNameTextField.text {
             
             // 表示名が入力されていない時はHUDを出して何もしない
@@ -75,28 +115,47 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             self.view.endEditing(true)
         }
     }
-    @IBAction func handleLogoutButton(_ sender: Any) {
-        // ログアウトする
-        try! Auth.auth().signOut()
+    
+    private func imageSelectActionSheet() {
+        let actionSheet = UIAlertController(title: "プロフィール画像の変更", message: "写真を選択してください", preferredStyle: UIAlertController.Style.actionSheet)
+        let camera = UIAlertAction(title: "写真を撮影する", style: UIAlertAction.Style.default, handler: {
+            (action: UIAlertAction!) in
+            // カメラを指定してピッカーを開く
+            if UIImagePickerController.isSourceTypeAvailable(.camera) {
+                let pickerController = UIImagePickerController()
+                pickerController.delegate = self
+                pickerController.sourceType = .camera
+                self.present(pickerController, animated: true, completion: nil)
+            }
+        })
+        let photoLibrar = UIAlertAction(title: "ライブラリーより選択する", style: UIAlertAction.Style.default, handler: {
+            (action: UIAlertAction!) in
+            // ライブラリ（カメラロール）を指定してピッカーを開く
+            if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
+                let pickerController = UIImagePickerController()
+                pickerController.delegate = self
+                pickerController.sourceType = .photoLibrary
+                self.present(pickerController, animated: true, completion: nil)
+            }
+        })
+        // 閉じるボタンが押された時の処理をクロージャ実装する
+        //UIAlertActionのスタイルがCancelなので赤く表示される
+        let close = UIAlertAction(title: "キャンセル", style: UIAlertAction.Style.destructive, handler: {
+            (action: UIAlertAction!) in
+        })
+        //UIAlertControllerにタイトル1ボタンとタイトル2ボタンと閉じるボタンをActionを追加
+        actionSheet.addAction(camera)
+        actionSheet.addAction(photoLibrar)
+        actionSheet.addAction(close)
         
-        // ログイン画面を表示する
-        let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Login")
-        self.present(loginViewController!, animated: true, completion: nil)
-        
-        // ログイン画面から戻ってきた時のためにホーム画面（index = 0）を選択している状態にしておく
-        tabBarController?.selectedIndex = 0
+        //実際にAlertを表示する
+        self.present(actionSheet, animated: true, completion: nil)
     }
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        // Do any additional setup after loading the view.
-        tableView.delegate = self
-        tableView.dataSource = self
-        navigationController?.navigationBar.barTintColor = .rgb(red: 39, green: 49, blue: 69)
-        navigationController?.navigationBar.tintColor = .white
-        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
-        
-        
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
     }
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -107,8 +166,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         //角を丸める
         userImageChangeButton.layer.cornerRadius = 10
-        settingUpdateButton.layer.cornerRadius = 10
-        logoutButton.layer.cornerRadius = 10
         userImage.layer.cornerRadius = 50
         //画像がセットされた表示する
         if image != nil {
@@ -137,8 +194,50 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
     }
     
-// データの数（＝セルの数）を返すメソッド
-func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    // 写真を撮影/選択したときに呼ばれるメソッド
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        if info[.originalImage] != nil {
+            // 撮影/選択された画像を取得する
+            let image = info[.originalImage] as! UIImage
+            // あとでCLImageEditorライブラリで加工する
+            print("DEBUG_PRINT: image = \(image)")
+            // CLImageEditorにimageを渡して、加工画面を起動する。
+            let editor = CLImageEditor(image: image)!
+            editor.delegate = self
+            editor.modalPresentationStyle = .fullScreen
+            picker.present(editor, animated: true, completion: nil)
+        }
+    }
+    
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        // ImageSelectViewController画面を閉じてタブ画面に戻る
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    // CLImageEditorで加工が終わったときに呼ばれるメソッド
+    func imageEditor(_ editor: CLImageEditor!, didFinishEditingWith image: UIImage!) {
+        // 投稿画面を開く
+        let SettingViewController = self.storyboard?.instantiateViewController(withIdentifier: "Setting") as! SettingViewController
+        userImage.image = image!
+        
+        self.dismiss(animated: true, completion: nil)
+        
+        //        editor.navigationController?.pushViewController(SettingViewController, animated: true)
+        //
+        //            editor.present(SettingViewController, animated: true, completion: nil)
+    }
+    
+    // CLImageEditorの編集がキャンセルされた時に呼ばれるメソッド
+    func imageEditorDidCancel(_ editor: CLImageEditor!) {
+        // ImageSelectViewController画面を閉じてタブ画面に戻る
+        self.presentingViewController?.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    // データの数（＝セルの数）を返すメソッド
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return self.postArray.count
     }
     
@@ -158,6 +257,10 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
         PostManagementViewController.postData = postArray[indexPath.row]
         navigationController?.pushViewController(PostManagementViewController, animated: true)
     }
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
+    }
+    
     
     // セルが削除が可能なことを伝えるメソッド
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath)-> UITableViewCell.EditingStyle {
@@ -179,3 +282,4 @@ func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> 
     }
     
 }
+

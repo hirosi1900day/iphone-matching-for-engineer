@@ -25,6 +25,7 @@ class LoginViewController: UIViewController {
             Auth.auth().signIn(withEmail: address, password: password) { authResult, error in
                 if let error = error {
                     print("DEBUG_PRINT: " + error.localizedDescription)
+                    SVProgressHUD.showError(withStatus: "サインインに失敗しました。")
                     return
                 }
                 print("DEBUG_PRINT: ログインに成功しました。")
@@ -81,6 +82,10 @@ class LoginViewController: UIViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        self.view.endEditing(true)
+    }
+    
     private func createUserForFirebase(email: String,username: String) {
         let docData = [
             "email": email,
@@ -94,17 +99,17 @@ class LoginViewController: UIViewController {
                 return
             }
         }
-    
-    
-    /*
-     // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+        
+        
+        /*
+         // MARK: - Navigation
+         
+         // In a storyboard-based application, you will often want to do a little preparation before navigation
+         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+         // Get the new view controller using segue.destination.
+         // Pass the selected object to the new view controller.
+         }
+         */
+        
     }
-    */
-
-}
 }

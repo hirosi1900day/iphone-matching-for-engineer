@@ -7,17 +7,11 @@
 
 import UIKit
 import Firebase
+import FirebaseUI
 
 class ChatRoomTableViewCell: UITableViewCell {
     var message: Message? {
         didSet {
-//            if let message = message {
-//                partnerMessageTextView.text = message.message
-//                let witdh = estimateFrameForTextView(text: message.message).width + 20
-//                messageTextViewWidthConstraint.constant = witdh
-//                
-//                partnerDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
-//            }
         }
     }
         
@@ -77,6 +71,10 @@ class ChatRoomTableViewCell: UITableViewCell {
                 let witdh = estimateFrameForTextView(text: message.message).width + 20
                 messageTextViewWidthConstraint.constant = witdh
                 
+                userImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
+                let imageRef = Storage.storage().reference().child(Const.ImagePath).child(message.uid + ".jpg")
+                print("メッセージ！！\(message.uid)")
+                userImage.sd_setImage(with: imageRef)
                 partnerDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
             }
         }

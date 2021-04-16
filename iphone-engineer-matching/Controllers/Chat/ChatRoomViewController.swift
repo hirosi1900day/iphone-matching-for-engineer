@@ -35,6 +35,7 @@ class ChatRoomViewController: UIViewController {
         chatRoomTableView.backgroundColor = .rgb(red: 118, green: 140, blue: 180)
         chatRoomTableView.contentInset = .init(top: 0, left: 0, bottom: 30, right: 0)
         chatRoomTableView.scrollIndicatorInsets = .init(top: 0, left: 0, bottom: 30, right: 0)
+        chatRoomTableView.keyboardDismissMode = .interactive
         fetchMessages()
         //ナビゲーションバーに相手の名前を表示する
         navigationItem.title = chatroom?.partnerUser?.username
@@ -49,6 +50,7 @@ class ChatRoomViewController: UIViewController {
     override var canBecomeFirstResponder: Bool {
         return true
     }
+    
     
     private func fetchMessages() {
         guard let chatroomDocId = chatroom?.documentId else { return }
@@ -115,12 +117,8 @@ extension ChatRoomViewController: ChatInputAccessoryViewDelegate {
             
             Firestore.firestore().collection("chatRooms").document(chatroomDocId).updateData(latestMessageData) { (err) in
                 if let err = err {
-                    print("最新メッセージの保存に失敗しました。\(err)")
                     return
                 }
-                
-                print("メッセージの保存に成功しました。")
-                
             }
         }
         

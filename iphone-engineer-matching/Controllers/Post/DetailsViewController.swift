@@ -36,10 +36,6 @@ class DetailsViewController: UIViewController {
             "createdAt": Timestamp()
         ] as [String : Any]
         
-        let partnerUser = [
-            "partnerUid": partnerUid
-        ] as [String : Any]
-        
         if uid == partnerUid {
             return
         }
@@ -104,7 +100,7 @@ class DetailsViewController: UIViewController {
                     let chatroom = ChatRoom(dic: dic)
                     chatroom.documentId = Snapshot?.documentID
                     
-                    let ChatRoomViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChatRoom") as! ChatRoomViewController
+                    let ChatRoomViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChatRoomViewController") as! ChatRoomViewController
                     ChatRoomViewController.user = self.user
                     ChatRoomViewController.chatroom = chatroom
                     self.navigationController?.pushViewController(ChatRoomViewController, animated: true)
