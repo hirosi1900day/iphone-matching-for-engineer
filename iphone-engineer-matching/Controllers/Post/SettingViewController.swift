@@ -52,7 +52,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         // 画像の表示
         if let uid = Auth.auth().currentUser?.uid{
             userImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
-            let imageRef = Storage.storage().reference().child(Const.ImagePath).child(uid  + ".jpg")
+            let imageRef = Storage.storage().reference().child(Const.ImagePath).child(uid + ".jpg")
             userImage.sd_setImage(with: imageRef)
         }
     }

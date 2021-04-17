@@ -12,6 +12,7 @@ class PostTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userNameLabel: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var postContentLabel: UILabel!
     @IBOutlet weak var genreLabel: UILabel!
@@ -20,7 +21,7 @@ class PostTableViewCell: UITableViewCell {
     @IBOutlet weak var dateLabel: UILabel!
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+        userImage.layer.cornerRadius = 25
     }
     
     override func setSelected(_ selected: Bool, animated: Bool) {
@@ -41,6 +42,8 @@ class PostTableViewCell: UITableViewCell {
         // タイトルの表示
         self.titleLabel.text = "\(postData.postTitle!)"
         
+        //名前を表示する
+        self.userNameLabel.text = "\(postData.name)"
         // 募集内容の表示
         self.postContentLabel.text = "\(postData.postContent!)"
         

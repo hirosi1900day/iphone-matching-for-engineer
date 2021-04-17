@@ -10,6 +10,7 @@ import Firebase
 
 class PostData: NSObject {
     var id: String
+    var name: String
     var postUserUid: String? = ""
     var postTitle: String?
     var qualification: String?
@@ -24,6 +25,8 @@ class PostData: NSObject {
         self.id = document.documentID
         
         let postDic = document.data()
+        
+        self.name = postDic["name"] as? String ?? ""
         
         self.postUserUid = postDic["postUserUid"] as? String
         

@@ -19,6 +19,7 @@ class DetailsViewController: UIViewController {
     private var selectedUser: User?
     
     @IBOutlet weak var userImage: UIImageView!
+    @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var postContentLabel: UILabel!
     @IBOutlet weak var qualificationLabel: UILabel!
@@ -43,16 +44,14 @@ class DetailsViewController: UIViewController {
     }
     
             
-    @IBAction func handleBackButton(_ sender: Any) {
-        //戻る
-        self.dismiss(animated: true, completion: nil)
-    }
+   
     
     override func viewDidLoad() {
         super.viewDidLoad()
         self.setPostData(_postData: postData)
         navigationItem.title = "詳細ページ"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        userImage.layer.cornerRadius = 25
         fetchLoginUserInfo()
     }
     
@@ -144,6 +143,10 @@ class DetailsViewController: UIViewController {
             let imageRef = Storage.storage().reference().child(Const.ImagePath).child(postData.postUserUid! + ".jpg")
             userImage.sd_setImage(with: imageRef)
         }
+        
+        //名前を表示する
+        self.userName.text = "\(postData.name)"
+        
         // タイトルの表示
         self.titleLabel.text = "\(postData.postTitle!)"
         
@@ -157,15 +160,5 @@ class DetailsViewController: UIViewController {
         // ジャンルの表示
         self.genreLabel.text = "\(postData.genre!)"
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
     
 }

@@ -15,13 +15,14 @@ class FavoriteIndexViewController: UIViewController, UITableViewDelegate, UITabl
     // Firestoreのリスナー
     var listener: ListenerRegistration?
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var favoriteTableView: UITableView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        tableView.delegate = self
-        tableView.dataSource = self
+        favoriteTableView.delegate = self
+        favoriteTableView.dataSource = self
+       
         
     }
     
@@ -47,7 +48,7 @@ class FavoriteIndexViewController: UIViewController, UITableViewDelegate, UITabl
                     return postData
                 }
                 // TableViewの表示を更新する
-                self.tableView.reloadData()
+                self.favoriteTableView.reloadData()
             }
         }
     }
@@ -65,6 +66,10 @@ class FavoriteIndexViewController: UIViewController, UITableViewDelegate, UITabl
         cell.textLabel?.text = postArray[indexPath.row].postTitle
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 80
     }
     
     // 各セルを選択した時に実行されるメソッド
@@ -107,16 +112,4 @@ class FavoriteIndexViewController: UIViewController, UITableViewDelegate, UITabl
             
         }
     }
-    
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }
