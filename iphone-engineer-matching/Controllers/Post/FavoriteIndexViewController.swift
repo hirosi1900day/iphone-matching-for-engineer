@@ -22,7 +22,10 @@ class FavoriteIndexViewController: UIViewController, UITableViewDelegate, UITabl
         // Do any additional setup after loading the view.
         favoriteTableView.delegate = self
         favoriteTableView.dataSource = self
-       
+        navigationController?.navigationBar.barTintColor = .rgb(red: 39, green: 49, blue: 69)
+        navigationItem.title = "お気に入り投稿一覧"
+        navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.tintColor = .white
         
     }
     
@@ -78,7 +81,8 @@ class FavoriteIndexViewController: UIViewController, UITableViewDelegate, UITabl
         let DetailsViewController = self.storyboard?.instantiateViewController(withIdentifier: "Detail") as! DetailsViewController
         
         DetailsViewController.postData = postArray[indexPath.row]
-        self.present(DetailsViewController, animated: true, completion: nil)
+        
+        self.navigationController?.pushViewController(DetailsViewController, animated: true)
     }
     
     // セルが削除が可能なことを伝えるメソッド

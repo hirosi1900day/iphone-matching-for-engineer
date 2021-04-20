@@ -52,6 +52,7 @@ class SignUpViewController: UIViewController {
                         print("DEBUG_PRINT: [displayName = \(user.displayName!)]の設定に成功しました。")
                         // HUDを消す
                         SVProgressHUD.dismiss()
+                        
                         // 画面を閉じてタブ画面に戻る
                         
                         self.dismiss(animated: true, completion: nil)

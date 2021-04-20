@@ -102,7 +102,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         
         DetailsViewController.postData = searchResult[indexPath.row]
         navigationController?.pushViewController(DetailsViewController, animated: true)
-//        self.present(DetailsViewController, animated: true, completion: nil)
     }
     
     //検索ボタン押下時の呼び出しメソッド
@@ -141,6 +140,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
         navigationController?.navigationBar.barTintColor = .rgb(red: 39, green: 49, blue: 69)
         navigationItem.title = "一覧"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.tintColor = .white
     }
     
     @objc func handleLikeButton(_ sender: UIButton, forEvent event: UIEvent) {

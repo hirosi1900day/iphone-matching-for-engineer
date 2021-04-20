@@ -78,14 +78,12 @@ class DetailsViewController: UIViewController {
                 self.makeChatRoom(docData: docData)
             }
         }
-        
-        
     }
     
     private func makeChatRoom(docData: [String: Any]) {
-       
-        let chatRoomId = randomString(length: 20)
-        Firestore.firestore().collection("chatRooms").document(chatRoomId).setData (docData) { (err) in
+        var chatRoomId = ""
+        chatRoomId = randomString(length: 20)
+        Firestore.firestore().collection("chatRooms").document(chatRoomId).setData(docData) { (err) in
             if let err = err {
                 print("ChatRoom情報の保存に失敗しました。\(err)")
                 return
@@ -98,7 +96,9 @@ class DetailsViewController: UIViewController {
                     guard let dic = Snapshot?.data() else { return }
                     let chatroom = ChatRoom(dic: dic)
                     chatroom.documentId = Snapshot?.documentID
-                    
+//                    let chatListViewController: ChatListViewController = ChatListViewController()
+//                    chatListViewController.chatrooms.append(chatroom)
+//                    
                     let ChatRoomViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChatRoomViewController") as! ChatRoomViewController
                     ChatRoomViewController.user = self.user
                     ChatRoomViewController.chatroom = chatroom

@@ -15,7 +15,8 @@ class PostViewController: UIViewController, UITextViewDelegate, UIPickerViewDele
     var data1: String?
     
     @IBOutlet weak var postTitle: UITextField!
-    @IBOutlet weak var qualification: UITextField!
+    
+    @IBOutlet weak var qualification: UITextView!
     @IBOutlet weak var postContent: UITextView!
     @IBOutlet weak var genre: UIPickerView!
     @IBOutlet weak var genreLabel: UILabel!

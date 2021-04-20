@@ -27,11 +27,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     @IBOutlet weak var logoutButton: UIBarButtonItem!
     @IBAction func handleUserImageButton(_ sender: Any) {
-        //        //imageSelectViewControllerに画面遷移する
-        //        let imageSelectViewController = self.storyboard?.instantiateViewController(withIdentifier: "imageSelect") as! imageSelectViewController
-        //        imageSelectViewController.modalPresentationStyle = .fullScreen
-        //        present(imageSelectViewController, animated: true, completion: nil)
-        
         imageSelectActionSheet()
     }
     @IBAction func handleChangeButton(_ sender: Any) {
@@ -60,7 +55,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     private func logoutAction() {
         // ログアウトする
         try! Auth.auth().signOut()
-        
         // ログイン画面を表示する
         let loginViewController = self.storyboard?.instantiateViewController(withIdentifier: "Login")
         self.present(loginViewController!, animated: true, completion: nil)
@@ -103,10 +97,8 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
                 changeRequest.commitChanges { error in
                     if let error = error {
                         SVProgressHUD.showError(withStatus: "表示名の変更に失敗しました。")
-                        print("DEBUG_PRINT: " + error.localizedDescription)
                         return
                     }
-                    print("DEBUG_PRINT: [displayName = \(user.displayName!)]の設定に成功しました。")
                     // HUDで完了を知らせる
                     SVProgressHUD.showSuccess(withStatus: "更新しました")
                 }
@@ -221,10 +213,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         userImage.image = image!
         
         self.dismiss(animated: true, completion: nil)
-        
-        //        editor.navigationController?.pushViewController(SettingViewController, animated: true)
-        //
-        //            editor.present(SettingViewController, animated: true, completion: nil)
     }
     
     // CLImageEditorの編集がキャンセルされた時に呼ばれるメソッド
@@ -232,9 +220,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
         // ImageSelectViewController画面を閉じてタブ画面に戻る
         self.presentingViewController?.dismiss(animated: true, completion: nil)
     }
-    
-    
-    
     
     // データの数（＝セルの数）を返すメソッド
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -260,7 +245,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 80
     }
-    
     
     // セルが削除が可能なことを伝えるメソッド
     func tableView(_ tableView: UITableView, editingStyleForRowAt indexPath: IndexPath)-> UITableViewCell.EditingStyle {

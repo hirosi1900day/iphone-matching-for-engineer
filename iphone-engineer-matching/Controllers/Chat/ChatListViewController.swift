@@ -8,30 +8,42 @@
 import UIKit
 import Firebase
 import FirebaseUI
+import RealmSwift
 
 class ChatListViewController: UIViewController {
     
-    private var chatrooms = [ChatRoom]()
+    var chatrooms = [ChatRoom]()
     private let cellId = "cellId"
-    private var user: User? 
+    private var user: User?
+    
     
     @IBOutlet weak var chatListTableView: UITableView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        self.setupViews()
-        self.fetchChatroomsInfoFromFirestore()
-        self.fetchLoginUserInfo()
-        
-        
+            self.setupViews()
+            self.fetchChatroomsInfoFromFirestore()
+            self.fetchLoginUserInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        
+    }
+    
+    private func getChatList(){
+        Firestore.firestore().collection("chatRooms").getDocuments { (snapshots, err) in
+            if let err = err {
+                print("ChatRooms情報の取得に失敗しました。\(err)")
+                return
+            }
+            self.chatrooms = [ChatRoom]()
+            snapshots?.documentChanges.forEach({ (documentChange) in
+                self.handleAddedDocumentChange(documentChange: documentChange)
+                print("nothing to do")
+            })
+        }
     }
     
     private func setupViews() {
@@ -42,15 +54,16 @@ class ChatListViewController: UIViewController {
         navigationController?.navigationBar.barTintColor = .rgb(red: 39, green: 49, blue: 69)
         navigationItem.title = "トーク"
         navigationController?.navigationBar.titleTextAttributes = [.foregroundColor: UIColor.white]
+        navigationController?.navigationBar.tintColor = .white
     }
     
-    private func fetchChatroomsInfoFromFirestore() {
+    func fetchChatroomsInfoFromFirestore() {
         Firestore.firestore().collection("chatRooms").addSnapshotListener { (snapshots, err) in
             if let err = err {
                 print("ChatRooms情報の取得に失敗しました。\(err)")
                 return
             }
-            self.chatrooms = [ChatRoom]()
+            
             snapshots?.documentChanges.forEach({ (documentChange) in
                 switch documentChange.type {
                 case .added:
@@ -62,7 +75,7 @@ class ChatListViewController: UIViewController {
         }
     }
     
-    private func handleAddedDocumentChange(documentChange: DocumentChange) {
+    func handleAddedDocumentChange(documentChange: DocumentChange) {
         
         
         let dic = documentChange.document.data()
@@ -84,7 +97,7 @@ class ChatListViewController: UIViewController {
                     
                     guard let dic = userSnapshot?.data() else { return }
                     let user = User(dic: dic)
-//                    user.uid = documentChange.document.documentID
+                    //                    user.uid = documentChange.document.documentID
                     user.uid = memberUid
                     chatroom.partnerUser = user
                     

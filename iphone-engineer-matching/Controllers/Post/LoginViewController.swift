@@ -8,12 +8,14 @@
 import UIKit
 import Firebase
 import SVProgressHUD
+import RealmSwift
 
 class LoginViewController: UIViewController {
     
+    let realm = try! Realm()
+    
     @IBOutlet weak var mailAddressTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    @IBOutlet weak var displayNameTextField: UITextField!
     @IBAction func handleLoginButton(_ sender: Any) {
         if let address = mailAddressTextField.text, let password = passwordTextField.text {
             //アドレスとパスワード名のいずれかでも入力されていない時は何もしない
@@ -28,7 +30,6 @@ class LoginViewController: UIViewController {
                     SVProgressHUD.showError(withStatus: "サインインに失敗しました。")
                     return
                 }
-                print("DEBUG_PRINT: ログインに成功しました。")
                 // HUDを消す
                 SVProgressHUD.dismiss()
                 // 画面を閉じてタブ画面に戻る
@@ -45,42 +46,25 @@ class LoginViewController: UIViewController {
         if Auth.auth().currentUser?.uid != nil {
             self.dismiss(animated: true, completion: nil)
         }
+        let access = Access()
+        let allAccess = realm.objects(Access.self)
+        if allAccess.count == 0 {
+            access.id = 1
+            try! self.realm.write {
+                self.realm.add(access)
+            }
+            guard let StartViewController = self.storyboard?.instantiateViewController(withIdentifier: "Start") else { return }
+            self.present(StartViewController, animated: true, completion: nil)
+            print("text")
+        }
     }
     override func viewDidLoad() {
         super.viewDidLoad()
-        print("ログインコントローラー")
-        // Do any additional setup after loading the view.
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         self.view.endEditing(true)
     }
     
-    
-    private func createUserForFirebase(email: String,username: String) {
-        let docData = [
-            "email": email,
-            "username": username,
-            "createdAt": Timestamp(),
-        ] as [String : Any]
-        var uid = Auth.auth().currentUser?.uid
-        Firestore.firestore().collection("users").document(uid!).setData(docData) { (err) in
-            if let err = err {
-                print("Firestoreへの保存に失敗しました。\(err)")
-                return
-            }
-        }
-        
-    }
-        /*
-         // MARK: - Navigation
-         
-         // In a storyboard-based application, you will often want to do a little preparation before navigation
-         override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-         // Get the new view controller using segue.destination.
-         // Pass the selected object to the new view controller.
-         }
-         */
-        
     
 }
