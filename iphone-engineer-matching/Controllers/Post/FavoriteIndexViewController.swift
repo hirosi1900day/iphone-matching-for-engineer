@@ -32,13 +32,11 @@ class FavoriteIndexViewController: UIViewController, UITableViewDelegate, UITabl
     //Firebaseからお気に入りされているデータだけを取得する
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        print("DEBUG_PRINT: viewWillAppear")
         // ログイン済みか確認
         if let myid = Auth.auth().currentUser?.uid {
             // listenerを登録して投稿データの更新を監視する
             let postsRef = Firestore.firestore().collection(Const.PostPath)
                 .whereField("likes", arrayContains: myid)
-            print("postReg中身\(postsRef)")
             listener = postsRef.addSnapshotListener() { (querySnapshot, error) in
                 if let error = error {
                     print("DEBUG_PRINT: snapshotの取得が失敗しました。 \(error)")
@@ -112,7 +110,7 @@ class FavoriteIndexViewController: UIViewController, UITableViewDelegate, UITabl
                 let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
                 postRef.updateData(["likes": updateValue])
             }
-
+            
             
         }
     }

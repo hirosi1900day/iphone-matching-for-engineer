@@ -15,7 +15,6 @@ class PostViewController: UIViewController, UITextViewDelegate, UIPickerViewDele
     var data1: String?
     
     @IBOutlet weak var postTitle: UITextField!
-    
     @IBOutlet weak var qualification: UITextView!
     @IBOutlet weak var postContent: UITextView!
     @IBOutlet weak var genre: UIPickerView!
@@ -28,7 +27,7 @@ class PostViewController: UIViewController, UITextViewDelegate, UIPickerViewDele
                 print("DEBUG_PRINT: 何かが空文字です。")
                 return
             }
-
+            
             // 投稿データの保存場所を定義する
             let postRef = Firestore.firestore().collection(Const.PostPath).document()
             // HUDで投稿処理中の表示を開始
@@ -92,5 +91,5 @@ class PostViewController: UIViewController, UITextViewDelegate, UIPickerViewDele
         genreLabel.text = "選択　\(data1!)"
     }
     
-
+    
 }

@@ -14,7 +14,7 @@ class ChatRoomTableViewCell: UITableViewCell {
         didSet {
         }
     }
-        
+    
     @IBOutlet weak var userImage: UIImageView!
     @IBOutlet weak var myMessageTextView: UITextView!
     @IBOutlet weak var partnerMessageTextView: UITextView!
@@ -25,7 +25,7 @@ class ChatRoomTableViewCell: UITableViewCell {
     @IBOutlet weak var myMessagetextViewWidthConstraint: NSLayoutConstraint!
     override func awakeFromNib() {
         super.awakeFromNib()
-
+        
         userImage.layer.cornerRadius = 30
         partnerMessageTextView.layer.cornerRadius = 15
         myMessageTextView.layer.cornerRadius = 15
@@ -73,7 +73,6 @@ class ChatRoomTableViewCell: UITableViewCell {
                 
                 userImage.sd_imageIndicator = SDWebImageActivityIndicator.gray
                 let imageRef = Storage.storage().reference().child(Const.ImagePath).child(message.uid + ".jpg")
-                print("メッセージ！！\(message.uid)")
                 userImage.sd_setImage(with: imageRef)
                 partnerDateLabel.text = dateFormatterForDateLabel(date: message.createdAt.dateValue())
             }

@@ -10,7 +10,7 @@ import Firebase
 import SVProgressHUD
 
 class SignUpViewController: UIViewController {
-
+    
     
     
     
@@ -19,7 +19,6 @@ class SignUpViewController: UIViewController {
     @IBOutlet weak var passwordTextField: UITextField!
     
     @IBOutlet weak var displayNameTextField: UITextField!
-   
     
     @IBAction func handleCreateAccountButton(_ sender: Any) {
         if let address = mailAddressTextField.text, let password = passwordTextField.text, let displayName = displayNameTextField.text {
@@ -70,7 +69,7 @@ class SignUpViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         // Do any additional setup after loading the view.
     }
     
@@ -84,14 +83,12 @@ class SignUpViewController: UIViewController {
             "username": username,
             "createdAt": Timestamp(),
         ] as [String : Any]
-        var uid = Auth.auth().currentUser?.uid
+        let uid = Auth.auth().currentUser?.uid
         Firestore.firestore().collection("users").document(uid!).setData(docData) { (err) in
             if let err = err {
                 print("Firestoreへの保存に失敗しました。\(err)")
                 return
             }
         }
-        
     }
-
 }

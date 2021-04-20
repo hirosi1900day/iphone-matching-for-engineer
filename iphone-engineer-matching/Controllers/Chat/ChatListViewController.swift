@@ -16,15 +16,13 @@ class ChatListViewController: UIViewController {
     private let cellId = "cellId"
     private var user: User?
     
-    
     @IBOutlet weak var chatListTableView: UITableView!
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-            self.setupViews()
-            self.fetchChatroomsInfoFromFirestore()
-            self.fetchLoginUserInfo()
+        self.setupViews()
+        self.fetchChatroomsInfoFromFirestore()
+        self.fetchLoginUserInfo()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -41,7 +39,6 @@ class ChatListViewController: UIViewController {
             self.chatrooms = [ChatRoom]()
             snapshots?.documentChanges.forEach({ (documentChange) in
                 self.handleAddedDocumentChange(documentChange: documentChange)
-                print("nothing to do")
             })
         }
     }
@@ -189,7 +186,6 @@ class ChatListTableViewCell: UITableViewCell {
                 dateLabel.text = dateFormatterForDateLabel(date: chatroom.latestMessage?.createdAt.dateValue() ?? Date())
                 latestMessageLabel.text = chatroom.latestMessage?.message
                 if let uid = chatroom.partnerUser?.uid {
-                    print("確認\(uid)")
                     self.setImage(UserId: uid)
                 }
             }

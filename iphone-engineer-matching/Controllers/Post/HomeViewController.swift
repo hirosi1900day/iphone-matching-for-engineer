@@ -10,7 +10,7 @@ import Firebase
 
 class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSource, UISearchBarDelegate {
     
-   
+    
     @IBOutlet weak var homeSearchBar: UISearchBar!
     @IBOutlet weak var tableView: UITableView!
     // 投稿データを格納する配列
@@ -25,12 +25,10 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        
         //デリゲート先を自分に設定する。
         tableView.delegate = self
         tableView.dataSource = self
         homeSearchBar.delegate = self
-        
         
         //何も入力されていなくてもReturnキーを押せるようにする。
         homeSearchBar.enablesReturnKeyAutomatically = false
@@ -81,7 +79,7 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return postArray.count
+        //        return postArray.count
         return searchResult.count
     }
     
@@ -115,7 +113,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             //検索文字列が空の場合はすべてを表示する。
             searchResult = postArray
         }else {
-            print("配列\(postArray)")
             //検索文字列を含むデータを検索結果配列に追加する。
             for postData in postArray {
                 let title: String? = postData.postTitle
@@ -130,7 +127,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
                     searchResult.append(postData)
                 }
             }
-            print("配列中身\(searchResult)")
         }
         //テーブルを再読み込みする。
         tableView.reloadData()
@@ -144,8 +140,6 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
     }
     
     @objc func handleLikeButton(_ sender: UIButton, forEvent event: UIEvent) {
-        print("DEBUG_PRINT: likeボタンがタップされました。")
-        
         // タップされたセルのインデックスを求める
         let touch = event.allTouches?.first
         let point = touch!.location(in: self.tableView)
@@ -169,15 +163,4 @@ class HomeViewController: UIViewController,UITableViewDelegate,UITableViewDataSo
             postRef.updateData(["likes": updateValue])
         }
     }
-    
-    /*
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     // Get the new view controller using segue.destination.
-     // Pass the selected object to the new view controller.
-     }
-     */
-    
 }

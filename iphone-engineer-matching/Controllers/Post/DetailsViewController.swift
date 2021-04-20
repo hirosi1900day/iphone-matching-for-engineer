@@ -12,7 +12,7 @@ import FirebaseUI
 class DetailsViewController: UIViewController {
     
     var postData: PostData!
-   
+    
     private var user: User?
     private var users = [User]()
     private var chatrooms = [ChatRoom]()
@@ -43,8 +43,8 @@ class DetailsViewController: UIViewController {
         self.CheckAndMoveChatRoom(uid: uid, partnerUid: partnerUid,docData: docData)
     }
     
-            
-   
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -62,7 +62,6 @@ class DetailsViewController: UIViewController {
                 print("Error getting documents: \(err)")
             } else {
                 for document in Snapshot!.documents {
-                    print("\(document.documentID) => \(document.data())")
                     let dic = document.data()
                     let chatroom = ChatRoom(dic: dic)
                     chatroom.documentId = document.documentID
@@ -96,9 +95,7 @@ class DetailsViewController: UIViewController {
                     guard let dic = Snapshot?.data() else { return }
                     let chatroom = ChatRoom(dic: dic)
                     chatroom.documentId = Snapshot?.documentID
-//                    let chatListViewController: ChatListViewController = ChatListViewController()
-//                    chatListViewController.chatrooms.append(chatroom)
-//                    
+                    
                     let ChatRoomViewController = self.storyboard?.instantiateViewController(withIdentifier: "ChatRoomViewController") as! ChatRoomViewController
                     ChatRoomViewController.user = self.user
                     ChatRoomViewController.chatroom = chatroom

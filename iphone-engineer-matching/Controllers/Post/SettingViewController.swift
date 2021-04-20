@@ -168,15 +168,12 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             // listenerを登録して投稿データの更新を監視する
             let postsRef = Firestore.firestore().collection(Const.PostPath)
                 .whereField("postUserUid", isEqualTo: myid)
-            print("postReg中身\(postsRef)")
             listener = postsRef.addSnapshotListener() { (querySnapshot, error) in
                 if let error = error {
-                    print("DEBUG_PRINT: snapshotの取得が失敗しました。 \(error)")
                     return
                 }
                 //取得したdocumentをもとにPostDataを作成し、postArrayの配列にする。
                 self.postArray = querySnapshot!.documents.map { document in
-                    print("DEBUG_PRINT: document取得 \(document.documentID)")
                     let postData = PostData(document: document)
                     return postData
                 }
@@ -192,7 +189,6 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             // 撮影/選択された画像を取得する
             let image = info[.originalImage] as! UIImage
             // あとでCLImageEditorライブラリで加工する
-            print("DEBUG_PRINT: image = \(image)")
             // CLImageEditorにimageを渡して、加工画面を起動する。
             let editor = CLImageEditor(image: image)!
             editor.delegate = self
@@ -260,10 +256,7 @@ class SettingViewController: UIViewController, UITableViewDelegate, UITableViewD
             // likesに更新データを書き込む
             let postRef = Firestore.firestore().collection(Const.PostPath).document(postData.id)
             postRef.delete()
-            
-            
         }
     }
-    
 }
 
