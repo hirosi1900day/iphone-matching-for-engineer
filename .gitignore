@@ -1,0 +1,8 @@
+Pods/*
+Instagram.xcworkspacemplete
+GoogleService-Info.plis
+
+//チャット関連ファイル
+ChatViewController.swift
+ChatUserViewController.swift
+
